@@ -9,3 +9,64 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id         String   @id @default(uuid())
+  name       String
+  email      String
+  password   String
+  role       Role
+  contactNo  String
+  address    String
+  profileImg String
+  review     Review[]
+  order      Order[]
+}
+
+enum Role {
+  admin
+  customer
+}
+
+model Category {
+  id    String @id @default(uuid())
+  title String
+  books Book[]
+}
+
+model Book {
+  id              String   @id @default(uuid())
+  title           String
+  author          String
+  price           Float
+  genre           String
+  publicationDate String
+  categoryId      String
+  category        Category @relation(fields: [categoryId], references: [id])
+  review          Review[]
+}
+
+model Review {
+  id     String @id @default(uuid())
+  review String
+  rating Int
+  userId String
+  User   User   @relation(fields: [userId], references: [id])
+  bookId String
+  book   Book   @relation(fields: [bookId], references: [id])
+}
+
+model Order {
+  id           String   @id @default(uuid())
+  userId       String
+  User         User     @relation(fields: [userId], references: [id])
+  orderedBooks Json
+  status       Status   @default(pending)
+  createdAt    DateTime @default(now())
+}
+
+enum Status {
+  pending
+  shipped
+  delivered
+}
