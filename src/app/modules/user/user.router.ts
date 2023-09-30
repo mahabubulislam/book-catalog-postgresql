@@ -8,5 +8,6 @@ const router = Router()
 router.route('/').get(auth(ROLE.ADMIN), userController.getAllUser)
 router.route('/:id').get(auth(ROLE.ADMIN), userController.getSingleUser)
 router.route('/:id').patch(auth(ROLE.ADMIN), userController.updateUser)
+router.route('/:id').delete(auth(ROLE.ADMIN), userController.deleteUser)
 
 export const userRoutes = router
