@@ -8,5 +8,5 @@ const router = Router()
 router
   .route('/create-category')
   .post(auth(ROLE.ADMIN), categoryController.createCategory)
-
+router.route('/').get(categoryController.getAllCategory)
 export const categoryRoutes = router

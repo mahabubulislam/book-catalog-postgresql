@@ -7,5 +7,8 @@ const createCategory = async (payload: Category): Promise<Category> => {
   })
   return category
 }
-
-export const categoryService = { createCategory }
+const getAllCategory = async (): Promise<Category[]> => {
+  const categories = await prisma.category.findMany()
+  return categories
+}
+export const categoryService = { createCategory, getAllCategory }
