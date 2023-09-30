@@ -10,4 +10,6 @@ router
   .post(auth(ROLE.ADMIN), categoryController.createCategory)
 router.route('/').get(categoryController.getAllCategory)
 router.route('/:id').get(categoryController.getSingleCategory)
+router.route('/:id').patch(categoryController.updateCategory)
+router.route('/:id').delete(categoryController.deleteCategory)
 export const categoryRoutes = router
