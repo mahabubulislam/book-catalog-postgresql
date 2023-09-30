@@ -24,4 +24,16 @@ const getSingleUser = catchAsync(async (req: Request, res: Response) => {
     data: result
   })
 })
-export const userController = { getAllUser, getSingleUser }
+const updateUser = catchAsync(async (req: Request, res: Response) => {
+  const id = req.params.id
+  const payload = req.body
+  const result = await userService.updateUser(id, payload)
+  sendResponse<User>(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Users updated successfully',
+    data: result
+  })
+})
+
+export const userController = { getAllUser, getSingleUser, updateUser }
