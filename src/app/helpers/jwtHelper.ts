@@ -8,4 +8,7 @@ const createToken = (payload: JwtPayload): string => {
   return token
 }
 
-export const jwtHelper = { createToken }
+const verifyToken = (token: string): JwtPayload => {
+  return jwt.verify(token, config.jwt.secret as Secret) as JwtPayload
+}
+export const jwtHelper = { createToken, verifyToken }
