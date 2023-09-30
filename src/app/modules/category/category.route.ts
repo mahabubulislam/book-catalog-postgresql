@@ -9,4 +9,5 @@ router
   .route('/create-category')
   .post(auth(ROLE.ADMIN), categoryController.createCategory)
 router.route('/').get(categoryController.getAllCategory)
+router.route('/:id').get(categoryController.getSingleCategory)
 export const categoryRoutes = router
