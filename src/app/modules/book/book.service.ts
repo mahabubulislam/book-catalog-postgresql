@@ -107,9 +107,32 @@ const getSingleBook = async (id: string): Promise<Book | null> => {
 
   return book
 }
+const updateBook = async (
+  id: string,
+  payload: Partial<Book>
+): Promise<Book> => {
+  const book = await prisma.book.update({
+    where: {
+      id: id
+    },
+    data: payload
+  })
+  return book
+}
+const deleteBook = async (id: string): Promise<Book | null> => {
+  const book = await prisma.book.delete({
+    where: {
+      id: id
+    }
+  })
+
+  return book
+}
 export const bookService = {
   createBook,
   getAllBook,
   getBookByCategory,
-  getSingleBook
+  getSingleBook,
+  updateBook,
+  deleteBook
 }
