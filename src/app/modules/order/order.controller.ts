@@ -31,4 +31,15 @@ const getAllOrder = catchAsync(async (req: Request, res: Response) => {
     data: result
   })
 })
-export const orderController = { createOrder, getAllOrder }
+const getSingleOrder = catchAsync(async (req: Request, res: Response) => {
+  const user = req.user as JwtPayload
+  const orderId = req.params.orderId
+  const result = await orderService.getSingleOrder(user, orderId)
+  sendResponse<Order>(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Order retrieved successfully',
+    data: result
+  })
+})
+export const orderController = { createOrder, getAllOrder, getSingleOrder }

@@ -11,5 +11,8 @@ router
 router
   .route('/')
   .get(auth(ROLE.ADMIN, ROLE.CUSTOMER), orderController.getAllOrder)
+router
+  .route('/:orderId')
+  .get(auth(ROLE.ADMIN, ROLE.CUSTOMER), orderController.getSingleOrder)
 
 export const orderRoutes = router
