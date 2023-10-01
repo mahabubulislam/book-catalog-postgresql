@@ -30,4 +30,16 @@ const getAllBook = catchAsync(async (req: Request, res: Response) => {
     meta: result.meta
   })
 })
-export const bookController = { createBook, getAllBook }
+const getBookByCategory = catchAsync(async (req: Request, res: Response) => {
+  const categoryId = req.params.categoryId
+  const options = pick(req.query, paginationFields)
+  const result = await bookService.getBookByCategory(categoryId, options)
+  sendResponse<Book[]>(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Categories retrieved successfully',
+    data: result.data,
+    meta: result.meta
+  })
+})
+export const bookController = { createBook, getAllBook, getBookByCategory }
