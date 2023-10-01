@@ -2,9 +2,11 @@
   "name": "book-catalog-postgresql",
   "version": "1.0.0",
   "description": "Book catalog system with TypeScript, Express, Prisma and Postgresql",
-  "main": "server.ts",
+  "main": "server.js",
   "scripts": {
-    "start": "ts-node-dev --respawn --transpile-only src/server.ts"
+    "build":"tsc",
+    "start": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "postinstall": "prisma generate"
   },
   "keywords": [],
   "author": "Mahbub",
