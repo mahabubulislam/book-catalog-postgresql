@@ -10,6 +10,7 @@ const auth =
       const token = req.headers.authorization
       if (!token) throw new ApiError(httpStatus.UNAUTHORIZED, 'Unauthorized')
       const verifiedUser = jwtHelper.verifyToken(token)
+      req.user = verifiedUser
       if (!roles.includes(verifiedUser.role))
         throw new ApiError(
           httpStatus.FORBIDDEN,
