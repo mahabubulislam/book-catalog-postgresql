@@ -25,7 +25,7 @@ const getAllBook = catchAsync(async (req: Request, res: Response) => {
   sendResponse<Book[]>(res, {
     success: true,
     statusCode: httpStatus.OK,
-    message: 'Categories retrieved successfully',
+    message: 'Books retrieved successfully',
     data: result.data,
     meta: result.meta
   })
@@ -37,9 +37,24 @@ const getBookByCategory = catchAsync(async (req: Request, res: Response) => {
   sendResponse<Book[]>(res, {
     success: true,
     statusCode: httpStatus.OK,
-    message: 'Categories retrieved successfully',
+    message: 'Books retrieved successfully',
     data: result.data,
     meta: result.meta
   })
 })
-export const bookController = { createBook, getAllBook, getBookByCategory }
+const getSingleBook = catchAsync(async (req: Request, res: Response) => {
+  const id = req.params.id
+  const result = await bookService.getSingleBook(id)
+  sendResponse<Book>(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Book retrieved successfully',
+    data: result
+  })
+})
+export const bookController = {
+  createBook,
+  getAllBook,
+  getBookByCategory,
+  getSingleBook
+}

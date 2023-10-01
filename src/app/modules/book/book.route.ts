@@ -8,4 +8,5 @@ const router = Router()
 router.route('/create-book').post(auth(ROLE.ADMIN), bookController.createBook)
 router.route('/').get(bookController.getAllBook)
 router.route('/:categoryId/category').get(bookController.getBookByCategory)
+router.route('/:id').get(bookController.getSingleBook)
 export const bookRoutes = router
